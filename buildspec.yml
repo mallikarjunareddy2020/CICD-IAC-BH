@@ -3,6 +3,6 @@ version: 0.1
 phases:
   build:
     commands: |
-        aws s3 cp cfn-nested s3://iac-source-bucket/ --recursive --include "*.json"
+        aws s3 cp cfn-nested s3://artifactbucket-cicd/ --recursive --include "*.json"
         echo "copy child stack templates to s3 "
 
