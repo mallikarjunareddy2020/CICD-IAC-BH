@@ -16,13 +16,13 @@
         "s3": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://artifactbucket-cicd.s3.amazonaws.com/s3.json"
+                "TemplateURL": "https://codepipeline-artifacts-bucket1.s3.amazonaws.com/s3.json"
             }
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://artifactbucket-cicd.s3.amazonaws.com/AWS+CLI.yml/sns.json",
+                "TemplateURL": "https://codepipeline-artifacts-bucket1.s3.amazonaws.com/sns.json",
                 "Parameters": {
                     "SnsTopicName": {
                         "Ref": "TopicName"
