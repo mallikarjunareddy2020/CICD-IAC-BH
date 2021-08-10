@@ -1,0 +1,54 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "SNS Email Bucket Creation Notifications of S3",
+    "Parameters": {
+        "SnsDisplayName": {
+            "Type": "String",
+            "Default": "Bucket Creation of s3",
+            "Description": "Enter sns display name"
+        },
+        "SnsTopicName": {
+            "Type": "String",
+            "Description": "Enter sns topic name "
+        },
+        "SnsSubscriber1": {
+            "Type": "String",   
+            "Description": "Enter email address to be notified"
+        },
+        "SnsProtocol": {
+            "Type": "String",
+            "Default": "Email",
+            "Description": "Enter Protocol of sns topic"
+        }
+    },
+    "Resources": {
+        "SNSS3": {
+            "Type": "AWS::SNS::Topic",
+            "Properties": {
+                "DisplayName": {
+                    "Ref": "SnsDisplayName"
+                },
+                "TopicName":{
+                    "Ref":"SnsTopicName"
+                },
+                "Subscription": [
+                    {
+                        "Endpoint": {
+                            "Ref": "SnsSubscriber1"
+                        },
+                        "Protocol": {
+                            "Ref": "SnsProtocol"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "TopicName": {
+            "Value": {
+                "Ref": "SnsTopicName"
+            }
+        }
+    }
+}

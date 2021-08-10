@@ -1,0 +1,52 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "TopicName": {
+            "Type": "String",
+            "Default": "sns-caspia-bh-dev-s3-alarm-0",
+            "Description": "Enter sns topic name "
+        },
+        "Subscriber1": {
+            "Type": "String",
+            "Default": "kp01vasantharani@gmail.com",
+            "Description": "Enter email address to be notified"
+        }
+    },
+    "Resources": {
+        "s3": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": "https://iac-source-bucket.s3.amazonaws.com/s3.json"
+            }
+        },
+        "sns": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": "https://iac-source-bucket.s3.amazonaws.com/sns.json",
+                "Parameters": {
+                    "SnsTopicName": {
+                        "Ref": "TopicName"
+                    },
+                    "SnsSubscriber1": {
+                        "Ref": "Subscriber1"
+                    }
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "StackRef": {
+            "Value": {
+                "Ref": "s3"
+            }
+        },
+        "OutputFromNestedStack": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "s3",
+                    "Outputs.BucketName"
+                ]
+            }
+        }
+    }
+}
