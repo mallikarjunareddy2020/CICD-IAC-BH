@@ -5,4 +5,4 @@ phases:
     commands: |
         aws s3 cp cfn-nested s3://iac-source-bucket/ --recursive --include "*.json"
         echo "copy child stack templates to s3 "
-   
+
